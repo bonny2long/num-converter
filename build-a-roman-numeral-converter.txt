@@ -1,0 +1,208 @@
+** start of undefined **
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roman Numeral Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Roman Numeral Converter</h1>
+        <input id="number" type="text" placeholder="Enter a number">
+        <button id="convert-btn">Convert</button>
+        <p id="output"></p>
+    </div>
+    <footer class="footer-section">
+        <p>&copy; 2025 Roman Numeral Converter by Bonny Makaniankhondo</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+** end of undefined **
+
+** start of undefined **
+
+body {
+    font-family: 'Trajan Pro', serif;
+    background: linear-gradient(to bottom, #f7f4e9, #efe4cc); /* Gentle parchment gradient */
+    color: #444;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    animation: fadeIn 1.5s ease-in-out; /* Page fade-in effect */
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 248, 220, 0.9); /* Semi-transparent parchment-like background */
+    border: 2px solid #704214;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Enhance depth */
+    width: 300px;
+    margin: auto;
+    flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.container:hover {
+    transform: scale(1.05); /* Slightly enlarges the container on hover */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.4); /* Sharper shadow on hover */
+}
+
+h1 {
+    font-size: 2em;
+    color: #704214;
+    margin-bottom: 20px;
+    letter-spacing: 2px; /* Roman-style spacing */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adds depth */
+}
+
+input, button {
+    font-size: 1em;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #704214;
+    border-radius: 5px;
+    width: 90%;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Button animation */
+}
+
+button {
+    background-color: #704214;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #8b5e34;
+    transform: translateY(-3px); /* Lifts button on hover */
+}
+
+p#output {
+    font-size: 1.2em;
+    margin-top: 15px;
+    color: #444;
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeInText 1s forwards; /* Animation for text appearing */
+}
+
+footer.footer-section {
+    text-align: center;
+    background-color: #704214;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 0.9em;
+    border-top: 2px solid #efe4cc;
+    width: 100%;
+    margin-top: auto;
+    animation: slideUp 1s ease-out; /* Footer slide-in animation */
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* Text rises into view */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+
+** end of undefined **
+
+** start of undefined **
+
+//convert a number to Roman numerals
+function convertToRoman(num) {
+    if (isNaN(num)) {
+        return 'Please enter a valid number.';
+    }
+
+    if (num <= 0) {
+        return 'Please enter a number greater than or equal to 1.';
+    }
+
+    if (num >= 4000) {
+        return 'Please enter a number less than or equal to 3999.';
+    }
+
+    const romanNumerals = [
+        ['M', 1000],
+        ['CM', 900],
+        ['D', 500],
+        ['CD', 400],
+        ['C', 100],
+        ['XC', 90],
+        ['L', 50],
+        ['XL', 40],
+        ['X', 10],
+        ['IX', 9],
+        ['V', 5],
+        ['IV', 4],
+        ['I', 1],
+    ];
+
+    let result = '';
+    let currentNumber = num;
+
+    for (const [roman, value] of romanNumerals) {
+        while (currentNumber >= value) {
+            result += roman;
+            currentNumber -= value;
+        }
+    }
+
+    return result;
+}
+
+// handle conversion and display result
+function handleConversion() {
+    const num = parseInt(document.getElementById('number').value);
+    const outputElement = document.getElementById('output');
+    outputElement.innerText = convertToRoman(num);
+}
+
+// event listener for the button click
+document.getElementById('convert-btn').addEventListener('click', handleConversion);
+
+//event listener for the "Enter" key press
+document.getElementById('number').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        handleConversion();
+    }
+});
+
+
+** end of undefined **
+
